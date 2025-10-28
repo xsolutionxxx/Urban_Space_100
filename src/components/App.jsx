@@ -10,7 +10,10 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Header />
-        <Container>
+        <Container clases="flex flex-1 flex-col gap-5">
+          <Product />
+          <Product />
+          <Product />
           <Product />
         </Container>
         <Footer />
