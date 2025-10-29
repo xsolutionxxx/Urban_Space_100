@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="py-2.5 h-15">
+    <footer className="py-2.5 h-15 bg-primary">
       <p className="text-center text-[12px]">
         Дізнайся більше про <span className="font-bold">Urban Space 100</span>
         <br />

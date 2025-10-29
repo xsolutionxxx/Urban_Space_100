@@ -7,9 +7,11 @@ import {
   GalleryVerticalEnd,
 } from "lucide-react";
 
+import ToggleTheme from "./ToggleTheme";
+
 function SettingsPanel() {
   return (
-    <div className="fixed top-[100px] z-40 py-3 px-[15px] w-full grid grid-cols-2 gap-y-5 gap-x-8 bg-primary">
+    <div className="fixed top-[100px] z-40 py-3 px-[15px] w-full grid grid-cols-[60%_40%] gap-y-5 gap-x-8 bg-primary shadow-md">
       <div className="flex flex-col">
         <div className="mb-2 flex items-center gap-2">
           <ListFilter strokeWidth={2} size={17} />
@@ -23,9 +25,15 @@ function SettingsPanel() {
           id="brand"
           className="px-1 mb-3 h-8 border rounded"
         >
-          <option value="anyone">Будь-хто</option>
-          <option value="FWMP">ФЯТБ</option>
-          <option value="ICON">ICON</option>
+          <option className="bg-primary" value="anyone">
+            Будь-хто
+          </option>
+          <option className="bg-primary" value="FWMP">
+            ФЯТБ
+          </option>
+          <option className="bg-primary" value="ICON">
+            ICON
+          </option>
         </select>
         <label htmlFor="category" className="mb-1 text-base">
           Оберіть категорію:
@@ -35,10 +43,18 @@ function SettingsPanel() {
           id="category"
           className="px-1 h-8 border rounded"
         >
-          <option value="anyone">Будь-яка категорія</option>
-          <option value="socks">Шкарпетки</option>
-          <option value="pots">Горнятка</option>
-          <option value="magnets">Магніти</option>
+          <option className="bg-primary" value="anyone">
+            Будь-яка категорія
+          </option>
+          <option className="bg-primary" value="socks">
+            Шкарпетки
+          </option>
+          <option className="bg-primary" value="pots">
+            Горнятка
+          </option>
+          <option className="bg-primary" value="magnets">
+            Магніти
+          </option>
         </select>
       </div>
       <div className="flex flex-col">
@@ -53,7 +69,7 @@ function SettingsPanel() {
           name="from"
           type="text"
           placeholder="100"
-          className="px-2 mb-3 w-[100px] h-8 border rounded"
+          className="px-2 w-20 mb-3 h-8 border rounded"
         />
         <label htmlFor="to" className="mb-1 text-base">
           До:
@@ -62,7 +78,7 @@ function SettingsPanel() {
           name="to"
           type="text"
           placeholder="500"
-          className="px-2 w-[100px] h-8 border rounded"
+          className="px-2 w-20 h-8 border rounded"
         />
       </div>
       <div>
@@ -71,16 +87,16 @@ function SettingsPanel() {
           <h3 className="font-medium text-base">Вигляд</h3>
         </div>
         <div className="flex items-center gap-4">
-          <div className="p-1 border rounded">
+          <button className="p-1 border rounded cursor-pointer">
             <GalleryVerticalEnd
               strokeWidth={2}
               size={24}
               className="rotate-180"
             />
-          </div>
-          <div className="p-1">
+          </button>
+          <button className="p-1 cursor-pointer">
             <LayoutList strokeWidth={2} size={24} />
-          </div>
+          </button>
         </div>
       </div>
       <div>
@@ -88,9 +104,7 @@ function SettingsPanel() {
           <SunMoon strokeWidth={2} size={18} />
           <h3 className="font-medium text-base">Тема</h3>
         </div>
-        <button className="py-1 px-10 border rounded font-medium text-base uppercase">
-          light
-        </button>
+        <ToggleTheme />
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Container from "./Container";
 import Header from "./Header";
-import Product from "./ProductVertical";
+import ProductVertical from "./ProductVertical";
+import ProductGorizontal from "./ProductGorizontal";
 import Footer from "./Footer";
 
 function App() {
@@ -11,10 +12,8 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Header />
         <Container clases="flex flex-1 flex-col gap-5">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          <ProductVertical />
+          <ProductGorizontal />
         </Container>
         <Footer />
       </div>

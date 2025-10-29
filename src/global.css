@@ -41,3 +41,11 @@ body {
     font-size: 14px;
     color: var(--color-text-main);
 }
+
+.dark {
+    --color-primary: #3B3B3B;
+    --color-secondary: #333333;
+    --color-accent: #ff3b3b;
+    --color-text-main: #ffffff;
+    --color-text-sub: #cccccc;
+}
