@@ -8,8 +8,11 @@ import {
 } from "lucide-react";
 
 import ToggleTheme from "./ToggleTheme";
+import { useLayout } from "../hooks/useLayout.js";
 
 function SettingsPanel() {
+  const { layout, toggleLayout } = useLayout();
+
   return (
     <div className="fixed top-[100px] z-40 py-3 px-[15px] w-full grid grid-cols-[60%_40%] gap-y-5 gap-x-8 bg-primary shadow-md">
       <div className="flex flex-col">
@@ -87,14 +90,24 @@ function SettingsPanel() {
           <h3 className="font-medium text-base">Вигляд</h3>
         </div>
         <div className="flex items-center gap-4">
-          <button className="p-1 border rounded cursor-pointer">
+          <button
+            onClick={() => toggleLayout("vertical")}
+            className={`p-1 cursor-pointer ${
+              layout === "vertical" ? "border rounded" : null
+            }`}
+          >
             <GalleryVerticalEnd
               strokeWidth={2}
               size={24}
               className="rotate-180"
             />
           </button>
-          <button className="p-1 cursor-pointer">
+          <button
+            onClick={() => toggleLayout("horizontal")}
+            className={`p-1 cursor-pointer ${
+              layout === "horizontal" ? "border rounded" : null
+            }`}
+          >
             <LayoutList strokeWidth={2} size={24} />
           </button>
         </div>

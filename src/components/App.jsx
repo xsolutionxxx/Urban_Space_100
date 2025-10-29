@@ -1,21 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Container from "./Container";
 import Header from "./Header";
-import ProductVertical from "./ProductVertical";
-import ProductGorizontal from "./ProductGorizontal";
 import Footer from "./Footer";
+import ProductContainer from "./ProductContainer";
+import { LayoutProvider } from "../context/LayoutProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
-        <Header />
-        <Container clases="flex flex-1 flex-col gap-5">
-          <ProductVertical />
-          <ProductGorizontal />
-        </Container>
-        <Footer />
+        <LayoutProvider>
+          <Header />
+          <ProductContainer />
+          <Footer />
+        </LayoutProvider>
       </div>
     </BrowserRouter>
   );
