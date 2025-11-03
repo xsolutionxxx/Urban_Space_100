@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Settings } from "lucide-react";
+import { Heart, Settings, X } from "lucide-react";
 
 import { useTheme } from "../hooks/useTheme.js";
 import SettingsPanel from "./SettingsPanel";
@@ -22,14 +22,18 @@ function Header() {
         }`}
       >
         <button onClick={() => setOpen(!open)} className="cursor-pointer">
-          <Settings strokeWidth={1.5} size={32} />
+          {open ? (
+            <X strokeWidth={1.5} size={32} />
+          ) : (
+            <Settings strokeWidth={1.5} size={32} />
+          )}
         </button>
 
         <Link to="/" className="w-35">
           <img src={logotypes[theme]} alt="logotype" className="w-full" />
         </Link>
 
-        <Link to="/favorites">
+        <Link to="/wishlist">
           <Heart strokeWidth={1.5} size={32} />
         </Link>
       </header>
