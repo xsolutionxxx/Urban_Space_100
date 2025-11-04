@@ -5,6 +5,7 @@ import Wishlist from "../pages/Wishlist";
 
 import Layout from "../layout/Layout";
 
+import { SettingsProvider } from "../context/SettingsProvider";
 import { WishlistProvider } from "../context/WishlistProvider";
 import { FiltersProvider } from "../context/FiltersProvider";
 import { LayoutProvider } from "../context/LayoutProvider";
@@ -58,18 +59,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <WishlistProvider>
-        <FiltersProvider>
-          <LayoutProvider>
-            <Routes>
-              <Route element={<Layout products={products} />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-              </Route>
-            </Routes>
-          </LayoutProvider>
-        </FiltersProvider>
-      </WishlistProvider>
+      <SettingsProvider>
+        <WishlistProvider>
+          <FiltersProvider>
+            <LayoutProvider>
+              <Routes>
+                <Route element={<Layout products={products} />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/wishlist" element={<Wishlist />} />
+                </Route>
+              </Routes>
+            </LayoutProvider>
+          </FiltersProvider>
+        </WishlistProvider>
+      </SettingsProvider>
     </BrowserRouter>
   );
 }

@@ -1,13 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Heart, Settings, X } from "lucide-react";
 
 import { useTheme } from "../hooks/useTheme.js";
+import { useSettings } from "../hooks/useSettings.js";
+
 import SettingsPanel from "./SettingsPanel";
 
 function Header() {
+  const location = useLocation();
+  const isWishlistPage = location.pathname === "/wishlist";
+  const isSettingsDisabled = isWishlistPage;
+
   const { theme } = useTheme();
-  const [open, setOpen] = useState(false);
+  const { settingsOpen, setSettingsOpen } = useSettings();
 
   const logotypes = {
     light: "/urban-space-logo.svg",
@@ -18,11 +23,19 @@ function Header() {
     <>
       <header
         className={`sticky top-0 z-50 px-[15px] py-2.5 h-25 flex justify-between items-center bg-primary ${
-          open ? null : "shadow-md"
+          settingsOpen ? null : "shadow-md"
         }`}
       >
-        <button onClick={() => setOpen(!open)} className="cursor-pointer">
-          {open ? (
+        <button
+          disabled={isSettingsDisabled}
+          onClick={() =>
+            isSettingsDisabled ? null : setSettingsOpen(!settingsOpen)
+          }
+          className={`cursor-pointer ${
+            isSettingsDisabled ? "opacity-40 cursor-not-allowed" : null
+          }`}
+        >
+          {settingsOpen ? (
             <X strokeWidth={1.5} size={32} />
           ) : (
             <Settings strokeWidth={1.5} size={32} />
@@ -34,10 +47,22 @@ function Header() {
         </Link>
 
         <Link to="/wishlist">
-          <Heart strokeWidth={1.5} size={32} />
+          {isWishlistPage ? (
+            <Heart strokeWidth={1.5} size={32} fill="red" />
+          ) : (
+            <Heart strokeWidth={1.5} size={32} />
+          )}
         </Link>
       </header>
-      {open ? <SettingsPanel /> : null}
+      {isWishlistPage && settingsOpen ? setSettingsOpen(!settingsOpen) : null}
+      {settingsOpen && <SettingsPanel />}
+
+      {settingsOpen && (
+        <div
+          className="fixed z-30 inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setSettingsOpen(false)}
+        />
+      )}
     </>
   );
 }

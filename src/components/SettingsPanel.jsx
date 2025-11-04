@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ListFilter,
   Coins,
@@ -11,7 +12,6 @@ import ToggleTheme from "./ToggleTheme";
 import { useLayout } from "../hooks/useLayout.js";
 import { useFilters } from "../hooks/useFilters.js";
 import { useDebounce } from "../hooks/useDebounce.js";
-import { useEffect, useState } from "react";
 
 function SettingsPanel() {
   const { layout, toggleLayout } = useLayout();
