@@ -18,8 +18,10 @@ export const FiltersProvider = ({ children }) => {
     localStorage.setItem("filters", JSON.stringify(filters));
   }, [filters]);
 
+  const resetFilters = () => setFilters(defaultFilters);
+
   return (
-    <FiltersContext.Provider value={{ filters, setFilters }}>
+    <FiltersContext.Provider value={{ filters, setFilters, resetFilters }}>
       {children}
     </FiltersContext.Provider>
   );

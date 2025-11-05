@@ -13,12 +13,14 @@ import ToggleTheme from "./ToggleTheme";
 import { useFilters } from "../hooks/useFilters.js";
 import { useSort } from "../hooks/useSort.js";
 import { useLayout } from "../hooks/useLayout.js";
+import { useTheme } from "../hooks/useTheme.js";
 import { useDebounce } from "../hooks/useDebounce.js";
 
 function SettingsPanel() {
-  const { layout, toggleLayout } = useLayout();
-  const { sortType, setSortType } = useSort();
-  const { filters, setFilters } = useFilters();
+  const { filters, setFilters, resetFilters } = useFilters();
+  const { sortType, setSortType, resetSortType } = useSort();
+  const { layout, toggleLayout, resetLayout } = useLayout();
+  const { resetTheme } = useTheme();
 
   const [localPriceFrom, setLocalPriceFrom] = useState(filters.priceFrom);
   const [localPriceTo, setLocalPriceTo] = useState(filters.priceTo);
@@ -192,6 +194,28 @@ function SettingsPanel() {
           <h3 className="font-medium text-base">Тема</h3>
         </div>
         <ToggleTheme />
+      </div>
+
+      <div className="col-span-2">
+        <div className="flex gap-10">
+          <button
+            onClick={() => resetFilters()}
+            className="px-2 h-8 bg-accent border rounded"
+          >
+            Скинути фільтри
+          </button>
+          <button
+            onClick={() => {
+              resetFilters();
+              resetSortType();
+              resetLayout();
+              resetTheme();
+            }}
+            className="px-2 h-8 bg-accent border rounded"
+          >
+            Скинути всі налаштування
+          </button>
+        </div>
       </div>
     </div>
   );

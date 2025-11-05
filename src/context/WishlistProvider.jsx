@@ -3,12 +3,8 @@ import { WishlistContext } from "./WishlistContext";
 
 export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState(() => {
-    try {
-      const stored = localStorage.getItem("wishlist");
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
+    const stored = localStorage.getItem("wishlist");
+    return stored ? JSON.parse(stored) : [];
   });
 
   useEffect(() => {
@@ -27,9 +23,11 @@ export const WishlistProvider = ({ children }) => {
 
   const isInWishlist = (id) => wishlist.some((item) => item.id === id);
 
+  const wishlistCount = wishlist.length;
+
   return (
     <WishlistContext.Provider
-      value={{ wishlist, toggleWishlist, isInWishlist }}
+      value={{ wishlist, toggleWishlist, isInWishlist, wishlistCount }}
     >
       {children}
     </WishlistContext.Provider>

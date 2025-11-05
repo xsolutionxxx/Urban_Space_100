@@ -10,8 +10,10 @@ export const SortProvider = ({ children }) => {
     localStorage.setItem("sort", sortType);
   }, [sortType]);
 
+  const resetSortType = () => setSortType("");
+
   return (
-    <SortContext.Provider value={{ sortType, setSortType }}>
+    <SortContext.Provider value={{ sortType, setSortType, resetSortType }}>
       {children}
     </SortContext.Provider>
   );

@@ -3,6 +3,7 @@ import { Heart, Settings, X } from "lucide-react";
 
 import { useTheme } from "../hooks/useTheme.js";
 import { useSettings } from "../hooks/useSettings.js";
+import { useWishlist } from "../hooks/useWishlist.js";
 
 import SettingsPanel from "./SettingsPanel";
 
@@ -11,6 +12,7 @@ function Header() {
   const isWishlistPage = location.pathname === "/wishlist";
   const isSettingsDisabled = isWishlistPage;
 
+  const { wishlistCount } = useWishlist();
   const { theme } = useTheme();
   const { settingsOpen, setSettingsOpen } = useSettings();
 
@@ -46,12 +48,17 @@ function Header() {
           <img src={logotypes[theme]} alt="logotype" className="w-full" />
         </Link>
 
-        <Link to="/wishlist">
+        <Link to="/wishlist" className="relative">
           {isWishlistPage ? (
             <Heart strokeWidth={1.5} size={32} fill="red" />
           ) : (
             <Heart strokeWidth={1.5} size={32} />
           )}
+          {wishlistCount && !isWishlistPage ? (
+            <div className="absolute -top-2 -left-3.5 w-6 h-6 flex justify-center items-center bg-accent rounded-xl">
+              {wishlistCount}
+            </div>
+          ) : null}
         </Link>
       </header>
       {isWishlistPage && settingsOpen ? setSettingsOpen(!settingsOpen) : null}

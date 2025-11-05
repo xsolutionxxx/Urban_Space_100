@@ -12,8 +12,10 @@ export const LayoutProvider = ({ children }) => {
 
   const toggleLayout = (type) => setLayout(type);
 
+  const resetLayout = () => setLayout("vertical");
+
   return (
-    <LayoutContext.Provider value={{ layout, toggleLayout }}>
+    <LayoutContext.Provider value={{ layout, toggleLayout, resetLayout }}>
       {children}
     </LayoutContext.Provider>
   );

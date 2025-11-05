@@ -25,7 +25,7 @@
 
     --color-primary: #ffffff;
     --color-secondary: #EEEEEE;
-    --color-accent: #E90303;
+    --color-accent: #e35858;
     --color-text-main: #000000;
     --color-text-sub: #828282;
 }
@@ -45,7 +45,7 @@ body {
 .dark {
     --color-primary: #3B3B3B;
     --color-secondary: #333333;
-    --color-accent: #ff3b3b;
+    --color-accent: #c04040;
     --color-text-main: #ffffff;
     --color-text-sub: #cccccc;
 }
