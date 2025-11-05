@@ -3,10 +3,12 @@ import { Frown } from "lucide-react";
 import ProductVertical from "./ProductVertical";
 import ProductHorizontal from "./ProductHorizontal";
 import { useFilters } from "../hooks/useFilters.js";
+import { useSort } from "../hooks/useSort.js";
 import { useLayout } from "../hooks/useLayout.js";
 
 function ProductContainer(props) {
   const { filters } = useFilters();
+  const { sortType } = useSort();
   const { layout } = useLayout();
 
   const filteredProducts = props.products.filter((product) => {
@@ -24,6 +26,19 @@ function ProductContainer(props) {
     return brandMatch && categoryMatch && priceFromMatch && priceToMatch;
   });
 
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch (sortType) {
+      case "az":
+        return a.title.localeCompare(b.title);
+      case "price-low":
+        return a.price - b.price;
+      case "price-high":
+        return b.price - a.price;
+      default:
+        return 0;
+    }
+  });
+
   return (
     <div className="py-[25px] px-[15px]">
       {filteredProducts.length === 0 ? (
@@ -37,7 +52,7 @@ function ProductContainer(props) {
             Всього елментів {filteredProducts.length}
           </h3>
           <div className="flex flex-col gap-y-5">
-            {filteredProducts.map((product) =>
+            {sortedProducts.map((product) =>
               layout === "vertical" ? (
                 <ProductVertical key={product.id} {...product} />
               ) : (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   ListFilter,
   Coins,
+  ArrowDownNarrowWide,
   View,
   SunMoon,
   LayoutList,
@@ -9,12 +10,14 @@ import {
 } from "lucide-react";
 
 import ToggleTheme from "./ToggleTheme";
-import { useLayout } from "../hooks/useLayout.js";
 import { useFilters } from "../hooks/useFilters.js";
+import { useSort } from "../hooks/useSort.js";
+import { useLayout } from "../hooks/useLayout.js";
 import { useDebounce } from "../hooks/useDebounce.js";
 
 function SettingsPanel() {
   const { layout, toggleLayout } = useLayout();
+  const { sortType, setSortType } = useSort();
   const { filters, setFilters } = useFilters();
 
   const [localPriceFrom, setLocalPriceFrom] = useState(filters.priceFrom);
@@ -119,6 +122,37 @@ function SettingsPanel() {
           placeholder="500"
           className="px-2 w-20 h-8 border rounded"
         />
+      </div>
+
+      <div className="col-span-2">
+        <div className="mb-2 flex items-center gap-2">
+          <ArrowDownNarrowWide strokeWidth={2} size={18} />
+          <h3 className="font-medium text-base">Сортування</h3>
+        </div>
+
+        <div className="w-[352px] flex flex-col">
+          <label htmlFor="sort"></label>
+          <select
+            value={sortType}
+            onChange={(e) => setSortType(e.target.value)}
+            name="sort"
+            id="sort"
+            className="px-1 h-8 border rounded"
+          >
+            <option className="bg-primary" value="">
+              Та як є
+            </option>
+            <option className="bg-primary flex" value="az">
+              За алфавітом
+            </option>
+            <option className="bg-primary" value="price-low">
+              Спочатку дешевше
+            </option>
+            <option className="bg-primary" value="price-high">
+              Спочатку дорожче
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

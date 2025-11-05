@@ -10,8 +10,8 @@ export const FiltersProvider = ({ children }) => {
   };
 
   const [filters, setFilters] = useState(() => {
-    const saved = localStorage.getItem("filters");
-    return saved ? JSON.parse(saved) : defaultFilters;
+    const savedFilters = localStorage.getItem("filters");
+    return savedFilters ? JSON.parse(savedFilters) : defaultFilters;
   });
 
   useEffect(() => {

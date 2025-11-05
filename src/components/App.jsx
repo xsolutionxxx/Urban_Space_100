@@ -7,6 +7,7 @@ import Layout from "../layout/Layout";
 
 import { SettingsProvider } from "../context/SettingsProvider";
 import { WishlistProvider } from "../context/WishlistProvider";
+import { SortProvider } from "../context/SortProvider";
 import { FiltersProvider } from "../context/FiltersProvider";
 import { LayoutProvider } from "../context/LayoutProvider";
 
@@ -62,14 +63,16 @@ function App() {
       <SettingsProvider>
         <WishlistProvider>
           <FiltersProvider>
-            <LayoutProvider>
-              <Routes>
-                <Route element={<Layout products={products} />}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/wishlist" element={<Wishlist />} />
-                </Route>
-              </Routes>
-            </LayoutProvider>
+            <SortProvider>
+              <LayoutProvider>
+                <Routes>
+                  <Route element={<Layout products={products} />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
+                  </Route>
+                </Routes>
+              </LayoutProvider>
+            </SortProvider>
           </FiltersProvider>
         </WishlistProvider>
       </SettingsProvider>
