@@ -40,7 +40,11 @@ function ProductContainer(props) {
   });
 
   return (
-    <div className="py-[25px] px-[15px]">
+    <div
+      className={`py-6 px-6 sm:px-10 ${
+        layout === "vertical" ? "lg:px-15" : "md:px-15"
+      }`}
+    >
       {filteredProducts.length === 0 ? (
         <h3 className="flex justify-center items-center gap-2 font-bold text-xl">
           Жодного результату не знайдено
@@ -51,7 +55,13 @@ function ProductContainer(props) {
           <h3 className="mb-3 font-medium text-base text-text-sub text-center">
             Всього елментів {filteredProducts.length}
           </h3>
-          <div className="flex flex-col gap-y-5">
+          <div
+            className={`grid grid-cols-1 gap-6 ${
+              layout === "vertical"
+                ? "sm:grid-cols-2 lg:gap-10 xl:grid-cols-3 2xl:grid-cols-4"
+                : "lg:grid-cols-2 md:gap-8"
+            }`}
+          >
             {sortedProducts.map((product) =>
               layout === "vertical" ? (
                 <ProductVertical key={product.id} {...product} />

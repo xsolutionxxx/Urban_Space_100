@@ -16,19 +16,21 @@ function ProductVertical({
   const liked = isInWishlist(id);
 
   return (
-    <div className="p-[15px] bg-primary rounded-2xl shadow-lg">
+    <div className="p-4 md:p-5 lg:p-6 bg-primary rounded-2xl shadow-lg">
       <img
         src={image}
         alt={title}
-        className="w-full h-[260px] mb-3 rounded-2xl object-cover"
+        className="mb-2 md:mb-3 lg:mb-4 aspect-6/5 w-full rounded-2xl object-cover"
       />
-      <span className="text-text-sub capitalize">
+      <span className="text-xs xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
         {brand.toUpperCase()}, {category}
       </span>
-      <h2 className="mb-2 font-bold text-lg">{title}</h2>
-      <p className="mb-2">{description}</p>
+      <h2 className="mb-1 xs:mb-2 font-bold text-lg md:text-xl lg:text-2xl leading-tight md:leading-snug">
+        {title}
+      </h2>
+      <p className="mb-2 sm:text-base lg:text-lg leading-snug">{description}</p>
       <div className="flex justify-between items-center">
-        <span className="font-bold text-xl">
+        <span className="font-bold text-lg xs:text-xl">
           {price} {currency}
         </span>
         <button
@@ -44,7 +46,7 @@ function ProductVertical({
               currency,
             })
           }
-          className="flex items-end gap-1 font-medium text-sm cursor-pointer"
+          className="lg:cursor-pointer"
         >
           {liked ? (
             <HeartOff strokeWidth={1.5} size={28} fill="red" />

@@ -33,9 +33,11 @@ function Wishlist() {
               Всього елментів {wishlist.length}
             </h3>
           </div>
-          {wishlist.map((product) => (
-            <ProductWishlist key={product.id} {...product} />
-          ))}
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            {wishlist.map((product) => (
+              <ProductWishlist key={product.id} {...product} />
+            ))}
+          </div>
         </div>
       )}
     </div>

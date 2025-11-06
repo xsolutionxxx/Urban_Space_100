@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Heart, HeartOff } from "lucide-react";
+import { Heart, HeartOff, ExternalLink } from "lucide-react";
 
 import { useWishlist } from "../hooks/useWishlist";
 
@@ -13,32 +12,32 @@ function ProductHorizontal({
   price,
   currency,
 }) {
-  const [openDescription, setOpenDescription] = useState(false);
-
   const { toggleWishlist, isInWishlist } = useWishlist();
   const liked = isInWishlist(id);
 
   return (
-    <div className="p-[15px] flex gap-[15px] bg-primary rounded-2xl shadow-lg">
+    <div className="p-3 md:p-4 lg:p-5 flex gap-2.5 xs:gap-3 2xs:gap-4 3xs:gap-4.5 bg-primary rounded-2xl shadow-lg">
       <img
         src={image}
         alt={title}
-        className="w-1/2 h-[180px] rounded-2xl object-cover"
+        className="aspect-3/4 w-[120px] xs:w-[140px] sm:w-[200px] sm:aspect-square rounded-2xl object-cover"
       />
-      <div className="w-1/2">
-        <span className="text-text-sub capitalize">
-          {brand.toUpperCase()}, {category}
-        </span>
-        <h2 className="mb-3 font-bold text-lg">{title}</h2>
-        <button
-          onClick={() => setOpenDescription(!openDescription)}
-          className="mb-2 font-medium underline"
-        >
-          {openDescription ? "Згорнути опис" : "Розгорнути опис"}
-        </button>
-        {openDescription ? <p className="mb-2.5">{description}</p> : null}
-        <div className="flex justify-between items-center">
-          <span className="font-bold text-xl">
+      <div className="w-full flex flex-col justify-between gap-3">
+        <div>
+          <span className="text-xs xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
+            {brand.toUpperCase()}, {category}
+          </span>
+          <h2 className="font-bold text-lg md:text-xl lg:text-2xl leading-tight md:leading-snug">
+            {title}
+          </h2>
+          <p className="sm:text-base lg:text-lg leading-snug">{description}</p>
+        </div>
+        {/* <button className="flex justify-start items-center gap-1 text- font-medium xs:text-base lg:text-lg leading-snug">
+          Більше
+          <ExternalLink strokeWidth={1.5} size={12} />
+        </button> */}
+        <div className="flex justify-between">
+          <span className="font-bold text-lg xs:text-xl">
             {price} {currency}
           </span>
           <button
@@ -54,13 +53,9 @@ function ProductHorizontal({
                 currency,
               })
             }
-            className="flex justify-start items-center gap-1 font-medium text-sm cursor-pointer"
+            className="lg:cursor-pointer"
           >
-            {liked ? (
-              <HeartOff strokeWidth={1.5} size={28} fill="red" />
-            ) : (
-              <Heart strokeWidth={1.5} size={28} />
-            )}
+            <Heart strokeWidth={1.5} size={28} fill={liked ? "red" : "none"} />
           </button>
         </div>
       </div>

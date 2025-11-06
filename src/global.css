@@ -28,6 +28,10 @@
     --color-accent: #e35858;
     --color-text-main: #000000;
     --color-text-sub: #828282;
+
+    --breakpoint-xs: 375px;
+    --breakpoint-2xs: 465px;
+    --breakpoint-3xs: 525px;
 }
 
 @import "tailwindcss";
