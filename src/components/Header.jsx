@@ -24,7 +24,7 @@ function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 px-[15px] py-2.5 h-25 flex justify-between items-center bg-primary ${
+        className={`sticky top-0 z-50 px-4 py-3 h-full flex justify-between items-center bg-primary ${
           settingsOpen ? null : "shadow-md"
         }`}
       >
@@ -38,9 +38,9 @@ function Header() {
           }`}
         >
           {settingsOpen ? (
-            <X strokeWidth={1.5} size={32} />
+            <X strokeWidth={1.5} size={36} />
           ) : (
-            <Settings strokeWidth={1.5} size={32} />
+            <Settings strokeWidth={1.5} size={36} />
           )}
         </button>
 
@@ -50,9 +50,9 @@ function Header() {
 
         <Link to="/wishlist" className="relative">
           {isWishlistPage ? (
-            <Heart strokeWidth={1.5} size={32} fill="red" />
+            <Heart strokeWidth={1.5} size={36} fill="red" />
           ) : (
-            <Heart strokeWidth={1.5} size={32} />
+            <Heart strokeWidth={1.5} size={36} />
           )}
           {wishlistCount && !isWishlistPage ? (
             <div className="absolute -top-2 -left-3.5 w-6 h-6 flex justify-center items-center bg-accent rounded-xl">

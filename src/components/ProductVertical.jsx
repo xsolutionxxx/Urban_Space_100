@@ -1,4 +1,4 @@
-import { Heart, HeartOff } from "lucide-react";
+import { Heart } from "lucide-react";
 
 import { useWishlist } from "../hooks/useWishlist";
 
@@ -48,11 +48,7 @@ function ProductVertical({
           }
           className="lg:cursor-pointer"
         >
-          {liked ? (
-            <HeartOff strokeWidth={1.5} size={28} fill="red" />
-          ) : (
-            <Heart strokeWidth={1.5} size={28} />
-          )}
+          <Heart strokeWidth={1.5} size={28} fill={liked ? "red" : "none"} />
         </button>
       </div>
     </div>

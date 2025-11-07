@@ -25,9 +25,17 @@ export const WishlistProvider = ({ children }) => {
 
   const wishlistCount = wishlist.length;
 
+  const resetWishlist = () => setWishlist([]);
+
   return (
     <WishlistContext.Provider
-      value={{ wishlist, toggleWishlist, isInWishlist, wishlistCount }}
+      value={{
+        wishlist,
+        toggleWishlist,
+        isInWishlist,
+        wishlistCount,
+        resetWishlist,
+      }}
     >
       {children}
     </WishlistContext.Provider>

@@ -42,14 +42,19 @@ function SettingsPanel() {
   }, [filters.priceFrom, filters.priceTo]);
 
   return (
-    <div className="fixed top-[100px] z-40 py-3 px-[15px] w-full grid grid-cols-[60%_40%] gap-y-5 gap-x-8 bg-primary shadow-md">
-      <div className="flex flex-col">
-        <div className="mb-2 flex items-center gap-2">
-          <ListFilter strokeWidth={2} size={17} />
-          <h3 className="font-medium text-base">Фільтри</h3>
+    <div className="fixed top-[119px] z-40 py-3 px-4 w-full grid grid-cols-3 gap-y-4 gap-x-6 bg-primary shadow-md">
+      <div className="col-span-2 flex flex-col gap-y-1 md:col-span-1">
+        <div className="mb-1 flex items-center gap-2">
+          <ListFilter strokeWidth={2} size={20} />
+          <h3 className="font-medium text-lg md:text-xl xl:text-2xl leading-tight">
+            Фільтри
+          </h3>
         </div>
 
-        <label htmlFor="brand" className="mb-1 text-base">
+        <label
+          htmlFor="brand"
+          className="text-base md:text-lg xl:text-xl leading-snug"
+        >
           Оберіть виробника:
         </label>
         <select
@@ -57,7 +62,7 @@ function SettingsPanel() {
           onChange={(e) => setFilters({ ...filters, brand: e.target.value })}
           name="brand"
           id="brand"
-          className="px-1 mb-3 h-8 border rounded"
+          className="px-1 mb-2 h-8 border rounded"
         >
           <option className="bg-primary" value="">
             Будь-хто
@@ -70,7 +75,10 @@ function SettingsPanel() {
           </option>
         </select>
 
-        <label htmlFor="category" className="mb-1 text-base">
+        <label
+          htmlFor="category"
+          className="text-base md:text-lg xl:text-xl leading-snug"
+        >
           Оберіть категорію:
         </label>
         <select
@@ -95,13 +103,18 @@ function SettingsPanel() {
         </select>
       </div>
 
-      <div className="flex flex-col">
-        <div className="mb-2 flex items-center gap-2">
-          <Coins strokeWidth={2} size={18} />
-          <h3 className="font-medium text-base">Ціна</h3>
+      <div className="flex flex-col gap-y-1">
+        <div className="mb-1 flex items-center gap-2">
+          <Coins strokeWidth={2} size={20} />
+          <h3 className="font-medium text-lg md:text-xl xl:text-2xl leading-tight">
+            Ціна
+          </h3>
         </div>
 
-        <label htmlFor="from" className="mb-1 text-base">
+        <label
+          htmlFor="from"
+          className="text-base md:text-lg xl:text-xl leading-snug"
+        >
           Від:
         </label>
         <input
@@ -110,10 +123,13 @@ function SettingsPanel() {
           name="from"
           type="text"
           placeholder="100"
-          className="px-2 w-20 mb-3 h-8 border rounded"
+          className="px-2 mb-2 h-8 border rounded"
         />
 
-        <label htmlFor="to" className="mb-1 text-base">
+        <label
+          htmlFor="to"
+          className="text-base md:text-lg xl:text-xl leading-snug"
+        >
           До:
         </label>
         <input
@@ -122,17 +138,19 @@ function SettingsPanel() {
           name="to"
           type="text"
           placeholder="500"
-          className="px-2 w-20 h-8 border rounded"
+          className="px-2 h-8 border rounded"
         />
       </div>
 
-      <div className="col-span-2">
-        <div className="mb-2 flex items-center gap-2">
-          <ArrowDownNarrowWide strokeWidth={2} size={18} />
-          <h3 className="font-medium text-base">Сортування</h3>
+      <div className="col-span-3 md:col-span-1">
+        <div className="mb-2 flex items-center gap-2 md:mb-9">
+          <ArrowDownNarrowWide strokeWidth={2} size={20} />
+          <h3 className="font-medium text-lg md:text-xl xl:text-2xl leading-tight">
+            Сортування
+          </h3>
         </div>
 
-        <div className="w-[352px] flex flex-col">
+        <div className="flex flex-col">
           <label htmlFor="sort"></label>
           <select
             value={sortType}
@@ -144,7 +162,7 @@ function SettingsPanel() {
             <option className="bg-primary" value="">
               Та як є
             </option>
-            <option className="bg-primary flex" value="az">
+            <option className="bg-primary" value="az">
               За алфавітом
             </option>
             <option className="bg-primary" value="price-low">
@@ -157,16 +175,18 @@ function SettingsPanel() {
         </div>
       </div>
 
-      <div>
+      <div className="col-span-2 3xs:col-span-1">
         <div className="mb-2 flex items-center gap-2">
-          <View strokeWidth={2} size={18} />
-          <h3 className="font-medium text-base">Вигляд</h3>
+          <View strokeWidth={2} size={20} />
+          <h3 className="font-medium text-lg md:text-xl xl:text-2xl leading-tight">
+            Вигляд
+          </h3>
         </div>
 
         <div className="flex items-center gap-4">
           <button
             onClick={() => toggleLayout("vertical")}
-            className={`p-1 cursor-pointer ${
+            className={`p-[5px] cursor-pointer ${
               layout === "vertical" ? "border rounded" : null
             }`}
           >
@@ -179,7 +199,7 @@ function SettingsPanel() {
 
           <button
             onClick={() => toggleLayout("horizontal")}
-            className={`p-1 cursor-pointer ${
+            className={`p-[5px] cursor-pointer ${
               layout === "horizontal" ? "border rounded" : null
             }`}
           >
@@ -190,32 +210,26 @@ function SettingsPanel() {
 
       <div>
         <div className="mb-2 flex items-center gap-2">
-          <SunMoon strokeWidth={2} size={18} />
-          <h3 className="font-medium text-base">Тема</h3>
+          <SunMoon strokeWidth={2} size={20} />
+          <h3 className="font-medium text-lg md:text-xl xl:text-2xl leading-tight">
+            Тема
+          </h3>
         </div>
         <ToggleTheme />
       </div>
 
-      <div className="col-span-2">
-        <div className="flex gap-10">
-          <button
-            onClick={() => resetFilters()}
-            className="px-2 h-8 bg-accent border rounded"
-          >
-            Скинути фільтри
-          </button>
-          <button
-            onClick={() => {
-              resetFilters();
-              resetSortType();
-              resetLayout();
-              resetTheme();
-            }}
-            className="px-2 h-8 bg-accent border rounded"
-          >
-            Скинути всі налаштування
-          </button>
-        </div>
+      <div className="col-span-3 3xs:col-span-1 min-h-8 3xs:h-full">
+        <button
+          onClick={() => {
+            resetFilters();
+            resetSortType();
+            resetLayout();
+            resetTheme();
+          }}
+          className="px-2 w-full h-full bg-accent border rounded"
+        >
+          Скинути всі налаштування
+        </button>
       </div>
     </div>
   );
