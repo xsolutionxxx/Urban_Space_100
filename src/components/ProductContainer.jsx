@@ -40,8 +40,6 @@ function ProductContainer(props) {
     }
   });
 
-  console.log(activeFiltersText);
-
   return (
     <div
       className={`py-6 px-6 sm:px-10 ${

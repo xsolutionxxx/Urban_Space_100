@@ -1,6 +1,9 @@
-import { Heart, HeartOff, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Heart } from "lucide-react";
 
 import { useWishlist } from "../hooks/useWishlist";
+
+import ExpandableText from "./ExpandableText";
 
 function ProductHorizontal({
   id,
@@ -12,8 +15,13 @@ function ProductHorizontal({
   price,
   currency,
 }) {
+  const [showTitle, setShowTitle] = useState(false);
+
   const { toggleWishlist, isInWishlist } = useWishlist();
   const liked = isInWishlist(id);
+
+  const shortTitle =
+    title.length > 25 ? title.slice(0, 25).trim() + "..." : title;
 
   return (
     <div className="p-3 md:p-4 lg:p-5 flex gap-2.5 xs:gap-3 2xs:gap-4 3xs:gap-4.5 bg-primary rounded-2xl shadow-lg">
@@ -27,15 +35,14 @@ function ProductHorizontal({
           <span className="text-xs xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
             {brand.toUpperCase()}, {category}
           </span>
-          <h2 className="font-bold text-lg md:text-xl lg:text-2xl leading-tight md:leading-snug">
-            {title}
+          <h2
+            onClick={() => setShowTitle(!showTitle)}
+            className="mb-2 font-bold text-lg md:text-xl lg:text-2xl leading-tight md:leading-snug"
+          >
+            {showTitle ? title : shortTitle}
           </h2>
-          <p className="sm:text-base lg:text-lg leading-snug">{description}</p>
+          <ExpandableText text={description} />
         </div>
-        {/* <button className="flex justify-start items-center gap-1 text- font-medium xs:text-base lg:text-lg leading-snug">
-          Більше
-          <ExternalLink strokeWidth={1.5} size={12} />
-        </button> */}
         <div className="flex justify-between">
           <span className="font-bold text-lg xs:text-xl">
             {price} {currency}
