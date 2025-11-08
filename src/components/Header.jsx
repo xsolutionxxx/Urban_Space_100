@@ -8,6 +8,8 @@ import { useWishlist } from "../hooks/useWishlist.js";
 import SettingsPanel from "./SettingsPanel";
 
 function Header() {
+  const base = import.meta.env.BASE_URL;
+
   const location = useLocation();
   const isWishlistPage = location.pathname === "/wishlist";
   const isSettingsDisabled = isWishlistPage;
@@ -17,8 +19,8 @@ function Header() {
   const { settingsOpen, setSettingsOpen } = useSettings();
 
   const logotypes = {
-    light: "/urban-space-logo.svg",
-    dark: "/urban-space-logo-dark.svg",
+    light: `${base}urban-space-logo.svg`,
+    dark: `${base}urban-space-logo-dark.svg`,
   };
 
   return (
