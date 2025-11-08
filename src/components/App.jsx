@@ -59,7 +59,7 @@ function App() {
   ];
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Urban_Space_100/">
       <SettingsProvider>
         <WishlistProvider>
           <FiltersProvider>
