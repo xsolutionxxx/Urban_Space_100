@@ -2,9 +2,10 @@ import { Frown } from "lucide-react";
 
 import ProductVertical from "./ProductVertical";
 import ProductHorizontal from "./ProductHorizontal";
-import { useFilters } from "../hooks/useFilters.js";
-import { useSort } from "../hooks/useSort.js";
-import { useLayout } from "../hooks/useLayout.js";
+
+import { useFilters } from "@features/filters/useFilters.js";
+import { useSort } from "@features/sort/useSort.js";
+import { useLayout } from "@features/layout/useLayout.js";
 
 function ProductContainer(props) {
   const { filters, activeFiltersText, hasActiveFilters, resetFilters } =

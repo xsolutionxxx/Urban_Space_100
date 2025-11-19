@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
 
-import { useWishlist } from "../hooks/useWishlist";
+import { useWishlist } from "@features/wishlist/useWishlist";
 
-import ExpandableText from "./ExpandableText";
+import ExpandableText from "@components/ui/ExpandableText";
 
 function ProductHorizontal({
   id,

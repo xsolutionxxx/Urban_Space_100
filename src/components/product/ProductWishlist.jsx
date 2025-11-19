@@ -1,6 +1,6 @@
 import { HeartOff, Undo } from "lucide-react";
 
-import { useWishlist } from "../hooks/useWishlist";
+import { useWishlist } from "@features/wishlist/useWishlist";
 
 function ProductWishlist({
   id,

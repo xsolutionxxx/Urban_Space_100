@@ -1,8 +1,8 @@
 import { Sun, Moon } from "lucide-react";
 
-import { useTheme } from "../hooks/useTheme.js";
+import { useTheme } from "@features/theme/useTheme.js";
 
-function ToggleTheme() {
+function ThemeControls() {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -25,4 +25,4 @@ function ToggleTheme() {
   );
 }
 
-export default ToggleTheme;
+export default ThemeControls;

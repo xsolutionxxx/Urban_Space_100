@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Frown } from "lucide-react";
 
-import { useWishlist } from "../hooks/useWishlist.js";
-import ProductWishlist from "../components/ProductWishlist";
+import { useWishlist } from "@features/wishlist/useWishlist.js";
+import ProductWishlist from "@components/product/ProductWishlist";
 
-function Wishlist() {
+function WishlistPage() {
   const { wishlist, resetWishlist } = useWishlist();
 
   return (
@@ -50,4 +50,4 @@ function Wishlist() {
   );
 }
 
-export default Wishlist;
+export default WishlistPage;

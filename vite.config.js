@@ -6,7 +6,14 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: "/Urban_Space_100/",
   plugins: [react(), tailwindcss()],
-  alias: {
-    "@": "/src",
+  resolve: {
+    alias: {
+      "@": "/src",
+      "@components": "/src/components",
+      "@pages": "/src/pages",
+      "@assets": "/src/assets",
+      "@hooks": "/src/shared/hooks",
+      "@features": "/src/features",
+    },
   },
 });

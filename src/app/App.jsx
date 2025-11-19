@@ -1,19 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home";
-import Wishlist from "../pages/Wishlist";
+import HomePage from "@pages/home/HomePage";
+import WishlistPage from "@pages/wishlist/WishlistPage";
+import AdminDashboardPage from "@pages/admin/AdminDashboardPage";
 
-import Layout from "../layout/Layout";
+import MainLayout from "@components/layout/MainLayout";
 
-import { SettingsProvider } from "../context/SettingsProvider";
-import { WishlistProvider } from "../context/WishlistProvider";
-import { SortProvider } from "../context/SortProvider";
-import { FiltersProvider } from "../context/FiltersProvider";
-import { LayoutProvider } from "../context/LayoutProvider";
+import { SettingsProvider } from "@features/settings/SettingsProvider";
+import { WishlistProvider } from "@features/wishlist/WishlistProvider";
+import { SortProvider } from "@features/sort/SortProvider";
+import { FiltersProvider } from "@features/filters/FiltersProvider";
+import { LayoutProvider } from "@features/layout/LayoutProvider";
 
-import socks from "../assets/products/socks.jpg";
-import pot from "../assets/products/pot.jpg";
-import magnet from "../assets/products/magnet.jpg";
+import socks from "@assets/products/socks.jpg";
+import pot from "@assets/products/pot.jpg";
+import magnet from "@assets/products/magnet.jpg";
 
 function App() {
   const products = [
@@ -59,16 +60,19 @@ function App() {
   ];
 
   return (
-    <BrowserRouter basename="/Urban_Space_100/">
+    <Router basename="/Urban_Space_100/">
       <SettingsProvider>
         <WishlistProvider>
           <FiltersProvider>
             <SortProvider>
               <LayoutProvider>
                 <Routes>
-                  <Route element={<Layout products={products} />}>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/wishlist" element={<Wishlist />} />
+                  <Route element={<MainLayout products={products} />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/wishlist" element={<WishlistPage />} />
+                  </Route>
+                  <Route>
+                    <Route path="/admin" element={<AdminDashboardPage />} />
                   </Route>
                 </Routes>
               </LayoutProvider>
@@ -76,7 +80,7 @@ function App() {
           </FiltersProvider>
         </WishlistProvider>
       </SettingsProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
 
