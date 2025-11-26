@@ -7,10 +7,8 @@ function MainLayout({ products }) {
     <div className=" min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-1">
-        <div className="mx-auto w-full max-w-[1920px]">
-          <Outlet context={{ products }} />
-        </div>
+      <main className="flex-1 mx-auto w-full max-w-[1920px] h-full flex flex-col">
+        <Outlet context={{ products }} />
       </main>
 
       <Footer />

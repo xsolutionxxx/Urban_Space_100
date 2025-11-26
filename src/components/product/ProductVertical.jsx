@@ -1,10 +1,11 @@
 import { Heart } from "lucide-react";
 
 import { useWishlist } from "@features/wishlist/useWishlist";
+import ProductSwiper from "./productSwiper/ProductSwiper";
 
 function ProductVertical({
   id,
-  image,
+  images,
   brand,
   category,
   title,
@@ -15,13 +16,19 @@ function ProductVertical({
   const { toggleWishlist, isInWishlist } = useWishlist();
   const liked = isInWishlist(id);
 
+  const imagesArray = Array.isArray(images) ? images : [images];
+
   return (
     <div className="p-4 md:p-5 lg:p-6 bg-primary rounded-2xl shadow-lg">
+      {imagesArray.length > 1 ? (
+      <ProductSwiper images={imagesArray} title={title} />
+    ) : (
       <img
-        src={image}
+        src={imagesArray[0]}
         alt={title}
         className="mb-2 md:mb-3 lg:mb-4 aspect-6/5 w-full rounded-2xl object-cover"
       />
+    )}
       <span className="text-xs xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
         {brand.toUpperCase()}, {category}
       </span>
@@ -37,7 +44,7 @@ function ProductVertical({
           onClick={() =>
             toggleWishlist({
               id,
-              image,
+              images,
               brand,
               category,
               title,

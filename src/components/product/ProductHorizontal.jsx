@@ -4,10 +4,11 @@ import { Heart } from "lucide-react";
 import { useWishlist } from "@features/wishlist/useWishlist";
 
 import ExpandableText from "@components/ui/ExpandableText";
+import ProductSwiper from "./productSwiper/ProductSwiper";
 
 function ProductHorizontal({
   id,
-  image,
+  images,
   brand,
   category,
   title,
@@ -23,13 +24,20 @@ function ProductHorizontal({
   const shortTitle =
     title.length > 25 ? title.slice(0, 25).trim() + "..." : title;
 
+  const imagesArray = Array.isArray(images) ? images : [images];
+
   return (
     <div className="p-3 md:p-4 lg:p-5 flex gap-2.5 xs:gap-3 2xs:gap-4 3xs:gap-4.5 bg-primary rounded-2xl shadow-lg">
+    {imagesArray.length > 1 ? (
+      <ProductSwiper images={imagesArray} title={title} />
+    ) : (
       <img
-        src={image}
+        src={imagesArray[0]}
         alt={title}
         className="aspect-3/4 w-[120px] xs:w-[140px] sm:w-[200px] sm:aspect-square rounded-2xl object-cover"
       />
+    )}
+      
       <div className="w-full flex flex-col justify-between gap-3">
         <div>
           <span className="text-xs xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
@@ -51,7 +59,7 @@ function ProductHorizontal({
             onClick={() =>
               toggleWishlist({
                 id,
-                image,
+                images,
                 brand,
                 category,
                 title,

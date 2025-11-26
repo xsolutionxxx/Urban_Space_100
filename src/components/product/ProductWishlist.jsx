@@ -4,7 +4,7 @@ import { useWishlist } from "@features/wishlist/useWishlist";
 
 function ProductWishlist({
   id,
-  image,
+  images,
   brand,
   category,
   title,
@@ -20,7 +20,7 @@ function ProductWishlist({
         <Undo strokeWidth={1.5} size={22} />
       </button>
       <img
-        src={image}
+        src={images[0]}
         alt={title}
         className="aspect-square w-20 xs:w-[100px] lg:w-[120px] rounded-2xl object-cover"
       />

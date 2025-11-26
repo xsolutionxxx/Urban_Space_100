@@ -13,14 +13,16 @@ import { FiltersProvider } from "@features/filters/FiltersProvider";
 import { LayoutProvider } from "@features/layout/LayoutProvider";
 
 import socks from "@assets/products/socks.jpg";
-import pot from "@assets/products/pot.jpg";
+import pot1 from "@assets/products/pot_1.jpg";
+import pot2 from "@assets/products/pot_2.jpg";
+import pot3 from "@assets/products/pot_3.jpg";
 import magnet from "@assets/products/magnet.jpg";
 
 function App() {
   const products = [
     {
       id: 1,
-      image: socks,
+      images: [socks],
       category: "шкарпетки",
       brand: "фятб",
       title: "Шкарпетки теплі “Ліжник” сірий",
@@ -33,7 +35,7 @@ function App() {
     },
     {
       id: 2,
-      image: pot,
+      images: [pot1, pot2, pot3],
       brand: "фятб",
       category: "горнятка",
       title: "Горнятко металеве “Ліжник” білий",
@@ -46,7 +48,7 @@ function App() {
     },
     {
       id: 3,
-      image: magnet,
+      images: [magnet],
       category: "магніти",
       brand: "фятб",
       title: "Магніт дерев’яний “Гуцули”",
