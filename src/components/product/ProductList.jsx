@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 function ProductList({ products, layout = "show-col-2" }) {
   return (
     <div
-      className={`grid gap-x-3 gap-y-5 mt-6 ${
+      className={`px-4 py-6 grid gap-x-3 gap-y-5 ${
         layout === "show-col-2" ? "grid-cols-2" : "grid-cols-1"
       }`}
     >

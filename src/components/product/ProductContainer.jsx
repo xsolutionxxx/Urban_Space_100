@@ -1,4 +1,4 @@
-import ProductFilters from "./ProductFilters";
+import FiltersHeader from "./FiltersHeader";
 import ProductEmpty from "./ProductEmpty";
 import ProductList from "./ProductList";
 
@@ -41,12 +41,12 @@ function ProductContainer({ products }) {
   });
 
   return (
-    <div className={`py-6 px-6 sm:px-10 h-full flex-1 flex flex-col`}>
+    <div className={`h-full flex-1 flex flex-col`}>
       {filteredProducts.length === 0 ? (
         <ProductEmpty onReset={resetFilters} />
       ) : (
         <>
-          <ProductFilters
+          <FiltersHeader
             total={filteredProducts.length}
             hasActiveFilters={hasActiveFilters}
             activeFiltersText={activeFiltersText}

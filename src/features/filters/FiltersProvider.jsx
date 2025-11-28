@@ -9,6 +9,16 @@ export const FiltersProvider = ({ children }) => {
     priceTo: "",
   };
 
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    if (filtersOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [filtersOpen]);
+
   const [filters, setFilters] = useState(() => {
     const savedFilters = localStorage.getItem("filters");
     return savedFilters ? JSON.parse(savedFilters) : defaultFilters;
@@ -43,6 +53,8 @@ export const FiltersProvider = ({ children }) => {
   return (
     <FiltersContext.Provider
       value={{
+        filtersOpen,
+        setFiltersOpen,
         filters,
         setFilters,
         activeFiltersText,

@@ -1,5 +1,4 @@
-// components/settings/SettingsSection.jsx
-function SettingsSection({ icon: Icon, title, className = "", children }) {
+function FiltersSection({ icon: Icon, title, className = "", children }) {
   return (
     <div className={className}>
       <div className="mb-2 flex items-center gap-2">
@@ -13,4 +12,4 @@ function SettingsSection({ icon: Icon, title, className = "", children }) {
   );
 }
 
-export default SettingsSection;
+export default FiltersSection;

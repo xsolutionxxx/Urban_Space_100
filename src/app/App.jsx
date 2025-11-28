@@ -6,7 +6,6 @@ import AdminDashboardPage from "@pages/admin/AdminDashboardPage";
 
 import MainLayout from "@components/layout/MainLayout";
 
-import { SettingsProvider } from "@features/settings/SettingsProvider";
 import { WishlistProvider } from "@features/wishlist/WishlistProvider";
 import { SortProvider } from "@features/sort/SortProvider";
 import { FiltersProvider } from "@features/filters/FiltersProvider";
@@ -63,25 +62,23 @@ function App() {
 
   return (
     <Router basename="/Urban_Space_100/">
-      <SettingsProvider>
-        <WishlistProvider>
-          <FiltersProvider>
-            <SortProvider>
-              <LayoutProvider>
-                <Routes>
-                  <Route element={<MainLayout products={products} />}>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/wishlist" element={<WishlistPage />} />
-                  </Route>
-                  <Route>
-                    <Route path="/admin" element={<AdminDashboardPage />} />
-                  </Route>
-                </Routes>
-              </LayoutProvider>
-            </SortProvider>
-          </FiltersProvider>
-        </WishlistProvider>
-      </SettingsProvider>
+      <WishlistProvider>
+        <FiltersProvider>
+          <SortProvider>
+            <LayoutProvider>
+              <Routes>
+                <Route element={<MainLayout products={products} />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/wishlist" element={<WishlistPage />} />
+                </Route>
+                <Route>
+                  <Route path="/admin" element={<AdminDashboardPage />} />
+                </Route>
+              </Routes>
+            </LayoutProvider>
+          </SortProvider>
+        </FiltersProvider>
+      </WishlistProvider>
     </Router>
   );
 }

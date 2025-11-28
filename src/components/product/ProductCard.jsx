@@ -22,7 +22,7 @@ function ProductCard({
   return (
     <div className="relative bg-primary rounded-2xl text-center shadow-lg">
       <div className="absolute top-0 p-3 pb-6 w-full rounded-t-2xl bg-linear-to-b from-black to-transparent flex items-start justify-between gap-2 z-30">
-        <span className="text-xs 2xs:text-[13px] md:text-sm leading-snug text-text-sub capitalize">
+        <span className="text-xs 2xs:text-[13px] md:text-sm leading-snug text-text-sub text-start capitalize">
           {brand.toUpperCase()}, {category}
         </span>
         <button

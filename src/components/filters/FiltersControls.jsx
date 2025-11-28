@@ -1,4 +1,3 @@
-// components/settings/FiltersControls.jsx
 function FiltersControls({ brand, category, onBrandChange, onCategoryChange }) {
   return (
     <>
