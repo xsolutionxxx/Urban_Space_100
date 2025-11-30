@@ -9,9 +9,10 @@ function WishlistEmpty({ ctaText = "Переглянути популярні", 
   const { setSortType } = useSort();
 
   return (
-    <div className="flex-1 flex items-center justify-center flex-col gap-6">
-      <div className="w-full max-w-md px-4 text-center">
+    <div className="pt-8 pb-2 flex-1 flex items-center justify-center flex-col gap-6">
+      <div className="w-full max-w-md text-center">
         <Message
+          title={"Пупупу… поки пусто"}
           text={
             "Знайдіть товари, які вам подобаються, і збережіть їх сюди, щоб повернутися пізніше."
           }
@@ -20,7 +21,7 @@ function WishlistEmpty({ ctaText = "Переглянути популярні", 
 
       <Link
         to={ctaTo}
-        className="relative flex justify-center gap-1 font-medium text-sm uppercase"
+        className="relative px-5.5 py-2.5 flex justify-center gap-1 bg-white text-sm text-accent uppercase shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
         aria-label="Перейти до каталогу товарів"
         onClick={() => setSortType("popular")}
       >
@@ -28,7 +29,7 @@ function WishlistEmpty({ ctaText = "Переглянути популярні", 
         <ExternalLink
           strokeWidth={2}
           size={12}
-          className="absolute top-0.5 -right-4"
+          className="absolute top-1 right-1"
         />
       </Link>
     </div>

@@ -23,7 +23,7 @@ function Header() {
   return (
     <>
       <header className={`sticky top-0 z-50 h-full bg-primary shadow-md`}>
-        <div className="px-4 py-3 mx-auto w-full max-w-[1920px]  flex justify-between items-center">
+        <div className="px-4 mx-auto w-full max-w-[1920px]  flex justify-between items-center">
           <ThemeControls />
 
           <Link to="/" className="w-35">
@@ -31,11 +31,11 @@ function Header() {
           </Link>
 
           <Link to="/wishlist" className="relative">
-            {isWishlistPage ? (
-              <Heart strokeWidth={1.5} size={36} fill="red" />
-            ) : (
-              <Heart strokeWidth={1.5} size={36} />
-            )}
+            <Heart
+              strokeWidth={1.5}
+              size={32}
+              fill={isWishlistPage ? "red" : "none"}
+            />
             {wishlistCount && !isWishlistPage ? (
               <div className="absolute -top-2 -left-3.5 w-6 h-6 flex justify-center items-center bg-accent rounded-xl">
                 {wishlistCount}

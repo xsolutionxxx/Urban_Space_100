@@ -3,13 +3,17 @@ import { FiltersContext } from "./FiltersContext";
 
 export const FiltersProvider = ({ children }) => {
   const defaultFilters = {
-    brand: "",
-    category: "",
+    brands: {},
+    categories: {},
     priceFrom: "",
     priceTo: "",
   };
 
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [filters, setFilters] = useState(() => {
+    const savedFilters = localStorage.getItem("filters");
+    return savedFilters ? JSON.parse(savedFilters) : defaultFilters;
+  });
 
   useEffect(() => {
     if (filtersOpen) {
@@ -18,11 +22,6 @@ export const FiltersProvider = ({ children }) => {
       document.body.style.overflow = "";
     }
   }, [filtersOpen]);
-
-  const [filters, setFilters] = useState(() => {
-    const savedFilters = localStorage.getItem("filters");
-    return savedFilters ? JSON.parse(savedFilters) : defaultFilters;
-  });
 
   useEffect(() => {
     localStorage.setItem("filters", JSON.stringify(filters));

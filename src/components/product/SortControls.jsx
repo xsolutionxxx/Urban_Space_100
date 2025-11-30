@@ -9,7 +9,7 @@ function SortControls({ sortType, onChange }) {
         onChange={(e) => onChange(e.target.value)}
         name="sort"
         id="sort"
-        className="px-1.5 h-8 min-w-[18px] max-w-45 w-full border rounded-xs text-[10px] uppercase"
+        className="px-1.5 h-10 min-w-[18px] max-w-45 w-full border rounded-xs text-xs uppercase"
       >
         <option className="bg-primary" value="">
           За замовчуванням

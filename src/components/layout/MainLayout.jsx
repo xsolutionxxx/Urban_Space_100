@@ -8,8 +8,8 @@ function MainLayout({ products }) {
   const { filtersOpen } = useFilters();
 
   return (
-    <div className=" min-h-screen flex flex-col">
-      {filtersOpen && <FiltersPanel />}
+    <div className="min-h-screen flex flex-col">
+      {filtersOpen && <FiltersPanel products={products} />}
       <Header />
 
       <main className="flex-1 mx-auto w-full max-w-[1920px] h-full flex flex-col">

@@ -8,9 +8,9 @@ function ThemeControls() {
   return (
     <button onClick={toggleTheme} className="cursor-pointer">
       {theme === "light" ? (
-        <Sun strokeWidth={1.5} size={36} />
+        <Sun strokeWidth={1.5} size={32} />
       ) : (
-        <Moon strokeWidth={1.5} size={36} />
+        <Moon strokeWidth={1.5} size={32} />
       )}
     </button>
   );

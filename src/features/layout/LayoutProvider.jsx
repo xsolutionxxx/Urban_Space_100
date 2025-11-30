@@ -3,7 +3,7 @@ import { LayoutContext } from "./LayoutContext";
 
 export const LayoutProvider = ({ children }) => {
   const [layout, setLayout] = useState(() => {
-    return localStorage.getItem("layout") || "vertical";
+    return localStorage.getItem("layout") || "show-col-2";
   });
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const LayoutProvider = ({ children }) => {
 
   const toggleLayout = (type) => setLayout(type);
 
-  const resetLayout = () => setLayout("vertical");
+  const resetLayout = () => setLayout("show-col-2");
 
   return (
     <LayoutContext.Provider value={{ layout, toggleLayout, resetLayout }}>

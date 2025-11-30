@@ -13,13 +13,23 @@ function ProductContainer({ products }) {
   const { layout } = useLayout();
 
   const filteredProducts = products.filter((product) => {
-    const categoryMatch = filters.category
-      ? product.category === filters.category
-      : true;
-    const brandMatch = filters.brand ? product.brand === filters.brand : true;
+    const selectedBrands = Object.keys(filters.brands);
+    const selectedCategories = Object.keys(filters.categories);
+
+    const brandMatch =
+      selectedBrands.length === 0
+        ? true
+        : selectedBrands.includes(product.brand);
+
+    const categoryMatch =
+      selectedCategories.length === 0
+        ? true
+        : selectedCategories.includes(product.category);
+
     const priceFromMatch = filters.priceFrom
       ? product.price >= +filters.priceFrom
       : true;
+
     const priceToMatch = filters.priceTo
       ? product.price <= +filters.priceTo
       : true;
@@ -41,9 +51,14 @@ function ProductContainer({ products }) {
   });
 
   return (
-    <div className={`h-full flex-1 flex flex-col`}>
+    <div className="h-full flex-1 flex flex-col">
       {filteredProducts.length === 0 ? (
-        <ProductEmpty onReset={resetFilters} />
+        <>
+          <h2 className="pl-6 pt-6.5 font-bold text-2xl md:text-2xl lg:text-3xl leading-tight md:leading-snug uppercase">
+            Крамничка
+          </h2>
+          <ProductEmpty onReset={resetFilters} />
+        </>
       ) : (
         <>
           <FiltersHeader
@@ -52,7 +67,6 @@ function ProductContainer({ products }) {
             activeFiltersText={activeFiltersText}
             onReset={resetFilters}
           />
-
           <ProductList products={sortedProducts} layout={layout} />
         </>
       )}

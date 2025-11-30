@@ -1,57 +1,37 @@
-function FiltersControls({ brand, category, onBrandChange, onCategoryChange }) {
-  return (
-    <>
-      <label
-        htmlFor="brand"
-        className="text-base md:text-lg xl:text-xl leading-snug"
-      >
-        Оберіть виробника:
-      </label>
-      <select
-        value={brand}
-        onChange={(e) => onBrandChange(e.target.value)}
-        name="brand"
-        id="brand"
-        className="px-1 mb-2 h-8 border rounded"
-      >
-        <option className="bg-primary" value="">
-          Будь-хто
-        </option>
-        <option className="bg-primary" value="фятб">
-          ФЯТБ
-        </option>
-        <option className="bg-primary" value="icon">
-          ICON
-        </option>
-      </select>
+import { useFilters } from "@features/filters/useFilters.js";
 
-      <label
-        htmlFor="category"
-        className="text-base md:text-lg xl:text-xl leading-snug"
-      >
-        Оберіть категорію:
-      </label>
-      <select
-        value={category}
-        onChange={(e) => onCategoryChange(e.target.value)}
-        name="category"
-        id="category"
-        className="px-1 h-8 border rounded"
-      >
-        <option className="bg-primary" value="">
-          Будь-яка категорія
-        </option>
-        <option className="bg-primary" value="шкарпетки">
-          Шкарпетки
-        </option>
-        <option className="bg-primary" value="горнятка">
-          Горнятка
-        </option>
-        <option className="bg-primary" value="магніти">
-          Магніти
-        </option>
-      </select>
-    </>
+function FiltersControls({ filterKey, filterNames }) {
+  const { filters, setFilters } = useFilters();
+
+  const handleCheckboxChange = (name, isChecked) => {
+    setFilters((prev) => {
+      const updatedFilterGroup = { ...prev[filterKey] };
+
+      if (isChecked) {
+        updatedFilterGroup[name] = true;
+      } else {
+        delete updatedFilterGroup[name];
+      }
+
+      return { ...prev, [filterKey]: updatedFilterGroup };
+    });
+  };
+
+  return (
+    <div className="pt-5 flex flex-col gap-3">
+      {filterNames.map((name, i) => (
+        <label key={i} className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            name={name}
+            checked={filters[filterKey]?.[name] ?? false}
+            onChange={(e) => handleCheckboxChange(name, e.target.checked)}
+            className="w-5 h-5"
+          />
+          <span className="text-base text-text-main/70">{name}</span>
+        </label>
+      ))}
+    </div>
   );
 }
 
