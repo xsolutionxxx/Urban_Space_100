@@ -13,8 +13,8 @@ function ProductContainer({ products }) {
   const { layout } = useLayout();
 
   const filteredProducts = products.filter((product) => {
-    const selectedBrands = Object.keys(filters.brands);
-    const selectedCategories = Object.keys(filters.categories);
+    const selectedBrands = Object.keys(filters?.brands ?? {});
+    const selectedCategories = Object.keys(filters?.categories ?? {});
 
     const brandMatch =
       selectedBrands.length === 0
