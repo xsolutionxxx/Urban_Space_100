@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { X } from "lucide-react";
 
 import { useFilters } from "@features/filters/useFilters.js";
-import { useDebounce } from "@hooks/useDebounce.js";
 
 import FiltersSection from "./FiltersSection.jsx";
 import FiltersControls from "./FiltersControls.jsx";
@@ -10,27 +10,97 @@ import PriceControls from "./PriceControls.jsx";
 function FiltersPanel({ products }) {
   const { filters, setFilters, setFiltersOpen, resetFilters } = useFilters();
 
-  const [localPriceFrom, setLocalPriceFrom] = useState(filters.priceFrom);
-  const [localPriceTo, setLocalPriceTo] = useState(filters.priceTo);
-
-  const debouncedFrom = useDebounce(localPriceFrom, 300);
-  const debouncedTo = useDebounce(localPriceTo, 300);
+  const [localFilters, setLocalFilters] = useState(filters);
 
   const brands = [...new Set(products.map((p) => p.brand))];
   const categories = [...new Set(products.map((p) => p.category))];
 
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, priceFrom: debouncedFrom }));
-  }, [debouncedFrom, setFilters]);
+    setLocalFilters(filters);
+  }, [filters]);
 
-  useEffect(() => {
-    setFilters((prev) => ({ ...prev, priceTo: debouncedTo }));
-  }, [debouncedTo, setFilters]);
+  const { minPrice, maxPrice } = useMemo(() => {
+    if (!products?.length) return { minPrice: 0, maxPrice: 0 };
 
-  useEffect(() => {
-    setLocalPriceFrom(filters.priceFrom);
-    setLocalPriceTo(filters.priceTo);
-  }, [filters.priceFrom, filters.priceTo]);
+    const prices = products.map((p) => p.price);
+    return {
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices),
+    };
+  }, [products]);
+
+  const activeFilters = useMemo(() => {
+    const active = [];
+
+    if (localFilters.priceFrom) {
+      active.push({
+        type: "price",
+        key: "priceFrom",
+        label: `Від: ${localFilters.priceFrom} грн`,
+      });
+    }
+
+    if (localFilters.priceTo) {
+      active.push({
+        type: "price",
+        key: "priceTo",
+        label: `До: ${localFilters.priceTo} грн`,
+      });
+    }
+
+    if (localFilters.brands) {
+      Object.keys(localFilters.brands).forEach((brand) => {
+        active.push({ type: "list", group: "brands", label: brand });
+      });
+    }
+
+    if (localFilters.categories) {
+      Object.keys(localFilters.categories).forEach((cat) => {
+        active.push({ type: "list", group: "categories", label: cat });
+      });
+    }
+
+    return active;
+  }, [localFilters]);
+
+  const removeFilter = (item) => {
+    setLocalFilters((prev) => {
+      const newState = { ...prev };
+
+      if (item.type === "price") {
+        newState[item.key] = "";
+      } else if (item.type === "list") {
+        const group = { ...newState[item.group] };
+        delete group[item.label];
+        newState[item.group] = group;
+      }
+
+      return newState;
+    });
+  };
+
+  const handlePriceChange = (key, value) => {
+    setLocalFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleCheckboxChange = (filterKey, name, isChecked) => {
+    setLocalFilters((prev) => {
+      const updatedFilterGroup = { ...(prev[filterKey] || {}) };
+
+      if (isChecked) {
+        updatedFilterGroup[name] = true;
+      } else {
+        delete updatedFilterGroup[name];
+      }
+
+      return { ...prev, [filterKey]: updatedFilterGroup };
+    });
+  };
+
+  const applyFilters = () => {
+    setFilters(localFilters);
+    setFiltersOpen(false);
+  };
 
   return (
     <>
@@ -46,34 +116,74 @@ function FiltersPanel({ products }) {
           Закрити
         </button>
 
-        <button
-          onClick={() => resetFilters()}
-          className="px-10 py-3 w-full bg-accent text-sm text-white/90 tracking-widest uppercase shadow-[0_5px_30px_rgba(0,0,0,0.4)]"
-        >
-          Очистити фільтри
-        </button>
-
         <div className="pb-20 flex-1 overflow-y-auto">
-          <FiltersSection title="Ціна">
+          {activeFilters.length > 0 && (
+            <FiltersSection
+              title="Обрані фільтри"
+              sectionKey="selected-filters"
+            >
+              <div className="mt-2 grid gap-5">
+                <span className="text-base font-medium text-gray-500">
+                  Обрано: {activeFilters.length}
+                </span>
+                <div className="flex flex-wrap gap-3">
+                  {activeFilters.map((item, idx) => (
+                    <button
+                      onClick={() => removeFilter(item)}
+                      key={idx}
+                      className="flex items-center gap-1 pl-3 pr-2 py-1 bg-secondary text-sm rounded-full"
+                    >
+                      <span>{item.label}</span>
+                      <X size={14} className="text-gray-500" />
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => resetFilters()}
+                  className="px-10 py-3 w-full bg-accent text-sm text-white/90 tracking-widest uppercase shadow-[0_5px_30px_rgba(0,0,0,0.4)]"
+                >
+                  Очистити фільтри
+                </button>
+              </div>
+            </FiltersSection>
+          )}
+
+          <FiltersSection title="Ціна" sectionKey="price">
             <PriceControls
-              priceFrom={localPriceFrom}
-              priceTo={localPriceTo}
-              onPriceFromChange={setLocalPriceFrom}
-              onPriceToChange={setLocalPriceTo}
+              priceFrom={filters.PriceFrom}
+              priceTo={filters.PriceTo}
+              onPriceFromChange={(val) => handlePriceChange("priceFrom", val)}
+              onPriceToChange={(val) => handlePriceChange("priceTo", val)}
+              minPlaceholder={minPrice}
+              maxPlaceholder={maxPrice}
             />
           </FiltersSection>
 
-          <FiltersSection title="Виробник">
-            <FiltersControls filterKey="brands" filterNames={brands} />
+          <FiltersSection title="Виробник" sectionKey="brands">
+            <FiltersControls
+              filterNames={brands}
+              selectedValues={localFilters.brands}
+              onChange={(name, checked) =>
+                handleCheckboxChange("brands", name, checked)
+              }
+            />
           </FiltersSection>
 
-          <FiltersSection title="Категорія">
-            <FiltersControls filterKey="categories" filterNames={categories} />
+          <FiltersSection title="Категорія" sectionKey="categories">
+            <FiltersControls
+              selected={localFilters.categories}
+              filterNames={categories}
+              selectedValues={localFilters.categories}
+              onChange={(name, checked) =>
+                handleCheckboxChange("categories", name, checked)
+              }
+            />
           </FiltersSection>
         </div>
 
         <button
-          onClick={() => setFiltersOpen(false)}
+          onClick={() => applyFilters()}
           className="absolute bottom-0 px-10 py-5 w-full h-20 bg-white text-lg text-accent uppercase shadow-[0_-10px_30px_rgba(0,0,0,0.4)]"
         >
           Застосувати

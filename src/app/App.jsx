@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import HomePage from "@pages/home/HomePage";
+import CatalogPage from "@pages/catalog/CatalogPage";
 import WishlistPage from "@pages/wishlist/WishlistPage";
 import AdminDashboardPage from "@pages/admin/AdminDashboardPage";
 
@@ -123,7 +123,7 @@ function App() {
             <LayoutProvider>
               <Routes>
                 <Route element={<MainLayout products={products} />}>
-                  <Route path="/" element={<HomePage />} />
+                  <Route path="/" element={<CatalogPage />} />
                   <Route path="/wishlist" element={<WishlistPage />} />
                 </Route>
                 <Route>

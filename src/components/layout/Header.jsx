@@ -23,7 +23,7 @@ function Header() {
   return (
     <>
       <header className={`sticky top-0 z-50 h-full bg-primary shadow-md`}>
-        <div className="px-4 mx-auto w-full max-w-[1920px]  flex justify-between items-center">
+        <div className="px-4 py-2 mx-auto w-full max-w-[1920px]  flex justify-between items-center">
           <ThemeControls />
 
           <Link to="/" className="w-35">
