@@ -4,10 +4,7 @@ import { ArrowLeft } from "lucide-react";
 function WishlistHeader() {
   return (
     <div className="flex flex-col gap-3">
-      <Link
-        to="/"
-        className="w-max flex items-center gap-1 text-xs text-text-main/50"
-      >
+      <Link to="/" className="w-max flex items-center gap-1 text-text-main/50">
         <ArrowLeft strokeWidth={2} size={12} />
         Крамничка
       </Link>

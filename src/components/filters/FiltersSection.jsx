@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-function FiltersSection({ title, sectionKey, children }) {
+function FiltersSection({ title, sectionKey, children, defaultOpen = true }) {
   const safeKey = (sectionKey || title).toLowerCase().replace(/\s+/g, "-");
   const lsKey = `filters-section-${safeKey}-open`;
 
   const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window === "undefined") return true;
+    if (typeof window === "undefined") return defaultOpen;
 
     try {
       const saved = localStorage.getItem(lsKey);
-      return saved === null ? true : saved === "true";
+      return saved === null ? defaultOpen : saved === "true";
     } catch (e) {
       console.warn("localStorage unavailable", e);
       return true;

@@ -116,11 +116,12 @@ function FiltersPanel({ products }) {
           Закрити
         </button>
 
-        <div className="pb-20 flex-1 overflow-y-auto">
+        <div className="pb-2 flex-1 overflow-y-auto">
           {activeFilters.length > 0 && (
             <FiltersSection
               title="Обрані фільтри"
               sectionKey="selected-filters"
+              defaultOpen={false}
             >
               <div className="mt-2 grid gap-5">
                 <span className="text-base font-medium text-gray-500">
@@ -151,8 +152,8 @@ function FiltersPanel({ products }) {
 
           <FiltersSection title="Ціна" sectionKey="price">
             <PriceControls
-              priceFrom={filters.PriceFrom}
-              priceTo={filters.PriceTo}
+              priceFrom={localFilters.priceFrom}
+              priceTo={localFilters.priceTo}
               onPriceFromChange={(val) => handlePriceChange("priceFrom", val)}
               onPriceToChange={(val) => handlePriceChange("priceTo", val)}
               minPlaceholder={minPrice}
@@ -184,7 +185,7 @@ function FiltersPanel({ products }) {
 
         <button
           onClick={() => applyFilters()}
-          className="absolute bottom-0 px-10 py-5 w-full h-20 bg-white text-lg text-accent uppercase shadow-[0_-10px_30px_rgba(0,0,0,0.4)]"
+          className="shrink-0 px-10 py-5 w-full h-20 bg-white text-lg text-accent uppercase shadow-[0_-10px_30px_rgba(0,0,0,0.4)] z-10"
         >
           Застосувати
         </button>
