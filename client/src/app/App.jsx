@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import CatalogPage from "@pages/catalog/CatalogPage";
@@ -11,7 +12,7 @@ import { SortProvider } from "@features/sort/SortProvider";
 import { FiltersProvider } from "@features/filters/FiltersProvider";
 import { LayoutProvider } from "@features/layout/LayoutProvider";
 
-import socks from "@assets/products/socks.jpg";
+/* import socks from "@assets/products/socks.jpg";
 import pot1 from "@assets/products/pot_1.jpg";
 import pot2 from "@assets/products/pot_2.jpg";
 import pot3 from "@assets/products/pot_3.jpg";
@@ -19,10 +20,10 @@ import magnet from "@assets/products/magnet.jpg";
 import icon from "@assets/products/icon.jpg";
 import poster from "@assets/products/poster.jpg";
 import lollipop from "@assets/products/lollipop.jpg";
-import dodosocks from "@assets/products/dodosocks.jpg";
+import dodosocks from "@assets/products/dodosocks.jpg"; */
 
 function App() {
-  const products = [
+  /* const products = [
     {
       id: 1,
       images: [socks],
@@ -113,7 +114,19 @@ function App() {
       inStock: true,
       isFavorite: false,
     },
-  ];
+  ]; */
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/products")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Отримані товари:", data);
+        setProducts(data);
+      })
+      .catch((err) => console.error("Помилка:", err));
+  }, []);
 
   return (
     <Router basename="/Urban_Space_100/">

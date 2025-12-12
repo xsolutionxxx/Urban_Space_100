@@ -4,6 +4,8 @@ import { useWishlist } from "@features/wishlist/useWishlist";
 
 import ProductSwiper from "./productSwiper/ProductSwiper";
 
+const API_URL = "http://localhost:5000";
+
 function ProductCard({
   id,
   images,
@@ -12,12 +14,16 @@ function ProductCard({
   title,
   description,
   price,
-  currency,
 }) {
   const { toggleWishlist, isInWishlist } = useWishlist();
   const liked = isInWishlist(id);
 
-  const imagesArray = Array.isArray(images) ? images : [images];
+  const rawImages = Array.isArray(images) ? images : [images];
+
+  const processedImages = rawImages.map((img) => {
+    if (img.startsWith("http")) return img;
+    return `${API_URL}${img}`;
+  });
 
   return (
     <div className="relative bg-primary rounded-2xl text-center shadow-lg">
@@ -35,7 +41,6 @@ function ProductCard({
               title,
               description,
               price,
-              currency,
             })
           }
           className="p-1.5 rounded-full bg-secondary lg:cursor-pointer"
@@ -43,19 +48,17 @@ function ProductCard({
           <Heart strokeWidth={1.5} size={20} fill={liked ? "red" : "none"} />
         </button>
       </div>
-      {imagesArray.length > 1 ? (
-        <ProductSwiper images={imagesArray} title={title} />
+      {processedImages.length > 1 ? (
+        <ProductSwiper images={processedImages} title={title} />
       ) : (
         <img
-          src={imagesArray[0]}
+          src={processedImages[0]}
           alt={title}
           className="w-full aspect-5/6 rounded-t-2xl object-cover"
         />
       )}
       <div className="p-2.5 flex flex-col gap-1.5">
-        <span className="font-bold text-base xs:text-xl">
-          {price} {currency}
-        </span>
+        <span className="font-bold text-base xs:text-xl">{price} грн</span>
         <h2 className="font-medium text-sm md:text-xl lg:text-2xl leading-tight md:leading-snug uppercase">
           {title}
         </h2>
