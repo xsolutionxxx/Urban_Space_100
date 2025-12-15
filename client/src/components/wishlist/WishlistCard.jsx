@@ -2,8 +2,18 @@ import { X } from "lucide-react";
 
 import { useWishlist } from "@features/wishlist/useWishlist";
 
+const API_URL = "http://localhost:5000";
+
 function WishlistCard({ id, images, brand, category, title, price, currency }) {
   const { toggleWishlist } = useWishlist();
+
+  const getImageUrl = (img) => {
+    if (!img) return "";
+    if (img.startsWith("http")) return img;
+    return `${API_URL}${img}`;
+  };
+
+  const imageSrc = images && images.length > 0 ? getImageUrl(images[0]) : "";
 
   return (
     <div className="relative flex bg-primary rounded-2xl shadow-lg">
@@ -18,7 +28,7 @@ function WishlistCard({ id, images, brand, category, title, price, currency }) {
         <X strokeWidth={1.5} size={24} />
       </button>
       <img
-        src={images[0]}
+        src={imageSrc}
         alt={title}
         className="aspect-7/8 w-32 rounded-l-2xl object-cover"
       />
