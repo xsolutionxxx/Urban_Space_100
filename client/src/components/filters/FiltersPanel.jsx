@@ -7,17 +7,37 @@ import FiltersSection from "./FiltersSection.jsx";
 import FiltersControls from "./FiltersControls.jsx";
 import PriceControls from "./PriceControls.jsx";
 
-function FiltersPanel({ products }) {
+import UrbanService from "@service/UrbanService";
+
+function FiltersPanel() {
   const { filters, setFilters, setFiltersOpen, resetFilters } = useFilters();
 
+  const [products, setProducts] = useState([]);
   const [localFilters, setLocalFilters] = useState(filters);
 
-  const brands = [...new Set(products.map((p) => p.brand))];
-  const categories = [...new Set(products.map((p) => p.category))];
+  const { getAllProducts } = UrbanService();
+
+  useEffect(() => {
+    getAllProducts()
+      .then((data) => {
+          setProducts(data);
+      })
+      .catch((e) => console.error("Не вдалося завантажити товари для фільтрів", e));
+  }, []);
 
   useEffect(() => {
     setLocalFilters(filters);
   }, [filters]);
+
+  const brands = useMemo(() => {
+      if (!products.length) return [];
+      return [...new Set(products.map((p) => p.brand))];
+  }, [products]);
+
+  const categories = useMemo(() => {
+      if (!products.length) return [];
+      return [...new Set(products.map((p) => p.category))];
+  }, [products]);
 
   const { minPrice, maxPrice } = useMemo(() => {
     if (!products?.length) return { minPrice: 0, maxPrice: 0 };
@@ -141,7 +161,7 @@ function FiltersPanel({ products }) {
                 </div>
 
                 <button
-                  onClick={() => resetFilters()}
+                  onClick={() => {resetFilters(); setFiltersOpen(false)}}
                   className="px-10 py-3 w-full bg-accent text-sm text-white/90 tracking-widest uppercase shadow-[0_5px_30px_rgba(0,0,0,0.4)]"
                 >
                   Очистити фільтри

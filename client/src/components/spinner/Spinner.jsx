@@ -1,9 +1,85 @@
-import spinner from '../../assets/spinner.svg';
-
 const Spinner = () => {
   return (
-    <img src={spinner} alt="spinner" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid"
+      width="200"
+      height="200"
+      style={{
+        shapeRendering: "auto",
+        display: "block",
+        margin: "auto",
+      }}
+    >
+      <g>
+        <rect fill="#bcbcbc" height="40" width="15" y="30" x="17.5">
+          <animate
+            begin="-0.25s"
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="18;30;30"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="y"
+          />
+          <animate
+            begin="-0.25s"
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="64;40;40"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="height"
+          />
+        </rect>
+        <rect fill="#5d5d5d" height="40" width="15" y="30" x="42.5">
+          <animate
+            begin="-0.125s"
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="20.999999999999996;30;30"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="y"
+          />
+          <animate
+            begin="-0.125s"
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="58.00000000000001;40;40"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="height"
+          />
+        </rect>
+        <rect fill="#000000" height="40" width="15" y="30" x="67.5">
+          <animate
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="20.999999999999996;30;30"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="y"
+          />
+          <animate
+            keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+            values="58.00000000000001;40;40"
+            keyTimes="0;0.5;1"
+            calcMode="spline"
+            dur="1.25s"
+            repeatCount="indefinite"
+            attributeName="height"
+          />
+        </rect>
+      </g>
+    </svg>
   );
-}
+};
 
 export default Spinner;

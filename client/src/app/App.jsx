@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import CatalogPage from "@pages/catalog/CatalogPage";
@@ -96,17 +95,6 @@ function App() {
     },
   ]; */
 
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      })
-      .catch((err) => console.error("Error:", err));
-  }, []);
-
   return (
     <Router basename="/Urban_Space_100/">
       <WishlistProvider>
@@ -114,7 +102,7 @@ function App() {
           <SortProvider>
             <LayoutProvider>
               <Routes>
-                <Route element={<MainLayout products={products} />}>
+                <Route element={<MainLayout />}>
                   <Route path="/" element={<CatalogPage />} />
                   <Route path="/wishlist" element={<WishlistPage />} />
                   <Route path="/product/:id" element={<ProductPage />} />

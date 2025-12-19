@@ -14,6 +14,8 @@ export default defineConfig({
       "@assets": "/src/assets",
       "@hooks": "/src/shared/hooks",
       "@features": "/src/features",
+      "@service" : "/src/service",
+      "@error" : "/src/components/error",
     },
   },
 });
