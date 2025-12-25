@@ -16,6 +16,7 @@ export default defineConfig({
       "@features": "/src/features",
       "@service" : "/src/service",
       "@error" : "/src/components/error",
+      "@utils" : "/src/utils",
     },
   },
 });

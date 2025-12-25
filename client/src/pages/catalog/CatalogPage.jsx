@@ -3,64 +3,54 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { useLayout } from "@features/layout/useLayout";
 import { useProcessedProducts } from "@hooks/useProcessedProducts";
+import { useHttp } from "@hooks/useHttp";
 
-import Spinner from "@components/spinner/Spinner";
 import ErrorMessage from "@error/ErrorMessage";
 
 import FiltersHeader from "@components/product/FiltersHeader";
 import ProductEmpty from "@components/product/ProductEmpty";
 import ProductList from "@components/product/ProductList";
+import SetContent from "@utils/setContent";
 
-import UrbanService from "@service/UrbanService";
+import { UrbanService } from "@service/UrbanService";
 
-function CatalogPage() {
+const CatalogPage = () => {
   const { layout } = useLayout();
-
+  
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const { getAllProducts } = UrbanService();
+  
+  const { request, process } = useHttp();
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-          const data = await getAllProducts();
-          setProducts(data);
-          setError(false);
-      } catch (e) {
-          console.error("Помилка завантаження каталогу:", e);
-          setError(true);
-      } finally {
-          setLoading(false);
-      }
-    };
-
-    fetchData();
+      UrbanService.getAllProducts(request)
+          .then(data => setProducts(data))
   }, []);
 
   const finalProducts = useProcessedProducts(products);
 
-  if (loading) return <div className="h-full flex-1 flex justify-center items-center"><Spinner /></div>;
+  const View = () => {
+    return (
+      <div className="h-full flex-1 flex flex-col">
+        <ErrorBoundary FallbackComponent={ErrorMessage}>
+            <FiltersHeader />
+        </ErrorBoundary>
 
-  if (error) return <div className="p-10 text-center text-red-500">Не вдалося завантажити товари.</div>;
+        <ErrorBoundary FallbackComponent={ErrorMessage}>
+            {finalProducts.length > 0 ? (
+                <ProductList products={finalProducts} layout={layout} />
+            ) : (
+                <ProductEmpty />
+            )}
+        </ErrorBoundary>
+      </div>
+    )
+  };
 
   return (
-    <div className="h-full flex-1 flex flex-col">
-      <ErrorBoundary FallbackComponent={ErrorMessage}>
-        <FiltersHeader />
-      </ErrorBoundary>
-
-      <ErrorBoundary>
-        {finalProducts.length <= 0 ? (
-          <ProductEmpty />
-        ) : (
-          <ProductList products={finalProducts} layout={layout} />
-        )}
-      </ErrorBoundary>
-    </div>
+      <>
+        {SetContent(process, View, products.length > 0 ? products : null)}
+      </>
   );
-}
+};
 
 export default CatalogPage;
