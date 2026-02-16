@@ -4,6 +4,7 @@ import { Heart } from "lucide-react";
 import { useWishlist } from "@features/wishlist/useWishlist";
 
 import ProductSwiper from "./productSwiper/ProductSwiper";
+import ImageWithLoader from "@components/ui/ImageWithLoader";
 
 const API_URL = "http://localhost:5000";
 
@@ -20,11 +21,6 @@ function ProductCard({
   const liked = isInWishlist(id);
 
   const rawImages = Array.isArray(images) ? images : [images];
-
-  const processedImages = rawImages.map((img) => {
-    if (img.startsWith("http")) return img;
-    return `${API_URL}${img}`;
-  });
 
   return (
     <div className="relative bg-primary rounded-2xl text-center shadow-lg">
@@ -51,13 +47,13 @@ function ProductCard({
       </div>
 
       <Link to={`/product/${id}`} className="block h-full">
-        {processedImages.length > 1 ? (
-          <ProductSwiper images={processedImages} title={title} />
+        {rawImages.length > 1 ? (
+          <ProductSwiper images={rawImages} title={title} />
         ) : (
-          <img
-            src={processedImages[0]}
+          <ImageWithLoader
+            src={rawImages[0]}
             alt={title}
-            className="w-full aspect-5/6 rounded-t-2xl object-cover"
+            className="aspect-5/6 rounded-t-2xl"
           />
         )}
         <div className="p-2.5 flex flex-col gap-1.5">

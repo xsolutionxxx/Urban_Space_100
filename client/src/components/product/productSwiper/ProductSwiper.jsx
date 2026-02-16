@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useLayout } from "@features/layout/useLayout.js";
 
+import ImageWithLoader from "@components/ui/ImageWithLoader";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -32,7 +34,7 @@ export default function ProductSwiper({ images = [], title }) {
       >
         {images.map((src, i) => (
           <SwiperSlide key={i}>
-            <img
+            <ImageWithLoader
               src={src}
               alt={`${title} ${i + 1}`}
               className={`w-full h-full object-cover ${

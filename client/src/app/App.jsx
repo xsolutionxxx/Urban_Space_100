@@ -6,6 +6,7 @@ import ProductPage from "@pages/product/ProductPage";
 import AdminDashboardPage from "@pages/admin/AdminDashboardPage";
 
 import MainLayout from "@components/layout/MainLayout";
+import AdminLayout from "@components/layout/AdminLayout";
 
 import { WishlistProvider } from "@features/wishlist/WishlistProvider";
 import { SortProvider } from "@features/sort/SortProvider";
@@ -106,6 +107,8 @@ function App() {
                   <Route path="/" element={<CatalogPage />} />
                   <Route path="/wishlist" element={<WishlistPage />} />
                   <Route path="/product/:id" element={<ProductPage />} />
+                </Route>
+                <Route element={<AdminLayout />}>
                   <Route path="/admin" element={<AdminDashboardPage />} />
                 </Route>
               </Routes>
