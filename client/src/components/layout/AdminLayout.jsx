@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
 function AdminLayout() {
   return (
-    <main className="mx-auto w-full max-w-[1920px] h-full">
+    <>
+      <Header />
+      <main className="mx-auto w-full max-w-[1920px] h-full">
         <Outlet />
-    </main>
+      </main>
+    </>
   );
 }
 

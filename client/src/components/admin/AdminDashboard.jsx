@@ -3,67 +3,56 @@ import { Link } from "react-router-dom";
 import { useHttp } from "@hooks/useHttp";
 import { UrbanService } from "@service/UrbanService";
 import Spinner from "@components/spinner/Spinner";
+import AdminStatsCard from "./AdminStatsCard";
+import AdminCard from "./AdminCard";
+import AdminProductsList from "./AdminProductsList";
+import AdminProductBadge from "./AdminProductBadge";
 
 const AdminDashboard = () => {
-    const [products, setProducts] = useState([]);
-    const { request, process } = useHttp(); 
+  const [products, setProducts] = useState([]);
+  const { request, process } = useHttp();
 
-    useEffect(() => {
-        UrbanService.getAllProducts(request).then(setProducts);
-    }, []);
+  useEffect(() => {
+    UrbanService.getAllProducts(request).then(setProducts);
+  }, []);
 
-    const handleDelete = (id) => {
-        if (window.confirm("Видалити цей товар?")) {
-            UrbanService.deleteProduct(request, id)
-                .then(() => {
-                    setProducts(products.filter(p => p.id !== id));
-                });
-        }
-    };
+  if (process === "loading" && products.length === 0) return <Spinner />;
 
-    if (process === 'loading' && products.length === 0) return <Spinner />;
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-2 gap-4">
+        <AdminStatsCard
+          title="Total Products"
+          value={products.length}
+          icon="📦"
+          trend="+12%"
+        />
+        <AdminStatsCard title="Visits" value="2.1k" icon="👁️" trend="+8.31%" />
+      </div>
 
-    return (
-        <div className="p-10">
-            <div className="flex justify-between mb-5">
-                <h1 className="text-2xl font-bold">Адмін панель</h1>
-                <Link to="/admin/create" className="bg-green-500 text-white px-4 py-2 rounded">
-                    + Додати товар
-                </Link>
-            </div>
-
-            <table className="w-full text-left border-collapse">
-                <thead>
-                    <tr className="border-b">
-                        <th className="p-2">ID</th>
-                        <th className="p-2">Назва</th>
-                        <th className="p-2">Ціна</th>
-                        <th className="p-2">Дії</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map(product => (
-                        <tr key={product.id} className="border-b hover:bg-gray-50">
-                            <td className="p-2">{product.id}</td>
-                            <td className="p-2">{product.title}</td>
-                            <td className="p-2">{product.price} грн</td>
-                            <td className="p-2 flex gap-2">
-                                <Link to={`/admin/edit/${product.id}`} className="text-blue-500">
-                                    Edit
-                                </Link>
-                                <button 
-                                    onClick={() => handleDelete(product.id)} 
-                                    className="text-red-500"
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+      <AdminCard name="Products">
+        <div className="mb-4 w-full flex justify-between items-center gap-5">
+          <input
+            type="text"
+            className="px-2 py-1 w-34 2xs:w-60 border border-gray-300 rounded-md"
+            placeholder="Search products by ID or title..."
+          />
+          <Link
+            to={`/admin/add`}
+            className="px-2 py-1 w-30 3xs:w-max bg-green-600 rounded-md text-white text-center capitalize cursor-pointer"
+          >
+            add new product
+          </Link>
         </div>
-    );
+        <AdminProductsList>
+          {products.map((product) => (
+            <AdminProductBadge key={product.id} product={product} />
+          ))}
+        </AdminProductsList>
+      </AdminCard>
+      <AdminCard name="Categories & Brands"></AdminCard>
+    </div>
+  );
 };
 
 export default AdminDashboard;

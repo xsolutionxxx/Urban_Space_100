@@ -4,6 +4,8 @@ import CatalogPage from "@pages/catalog/CatalogPage";
 import WishlistPage from "@pages/wishlist/WishlistPage";
 import ProductPage from "@pages/product/ProductPage";
 import AdminDashboardPage from "@pages/admin/AdminDashboardPage";
+import AdminAddProductPage from "@pages/admin/AdminAddProductPage";
+/* import AdminEditProductPage from "@pages/admin/AdminEditProductPage"; */
 
 import MainLayout from "@components/layout/MainLayout";
 import AdminLayout from "@components/layout/AdminLayout";
@@ -110,6 +112,11 @@ function App() {
                 </Route>
                 <Route element={<AdminLayout />}>
                   <Route path="/admin" element={<AdminDashboardPage />} />
+                  <Route path="/admin/add" element={<AdminAddProductPage />} />
+                  {/* <Route
+                    path="/admin/edit/:id"
+                    element={<AdminEditProductPage />}
+                  /> */}
                 </Route>
               </Routes>
             </LayoutProvider>

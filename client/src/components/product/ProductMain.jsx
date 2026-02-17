@@ -1,28 +1,22 @@
-import { Link } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { Heart, HeartCrack } from "lucide-react";
 
 import { useWishlist } from "@features/wishlist/useWishlist";
 
+import BackToHomeBtn from "../ui/BackToHomeBtn";
 import ProductSwiper from "./productSwiper/ProductSwiper";
 
-const API_URL = "http://localhost:5000";
-
 function ProductMain({ product }) {
-  const {
-    id,
-    title, 
-    price, 
-    description, 
-    images, 
-    brand, 
-    category
-  } = product;
-  
+  const { id, title, price, description, images, brand, category } = product;
+
   const { toggleWishlist, isInWishlist } = useWishlist();
   const liked = isInWishlist(id);
 
   return (
     <>
+      <BackToHomeBtn
+        linkText="Назад до крамнички"
+        className="hidden md:block"
+      />
       {images.length > 1 ? (
         <ProductSwiper images={images} title={title} />
       ) : (
@@ -32,7 +26,6 @@ function ProductMain({ product }) {
           className="w-full aspect-5/6 object-cover"
         />
       )}
-
       <div className="px-4 pb-8 pt-6">
         <span className="text-xs 2xs:text-[13px] md:text-sm leading-snug text-start capitalize">
           {brand.toUpperCase()}, {category}
@@ -52,9 +45,14 @@ function ProductMain({ product }) {
               title,
               price,
             })
-            } className={`px-5.5 py-2.5 w-full text-sm uppercase shadow-[0_4px_32px_rgba(0,0,0,0.4)] ${ !liked ? "bg-white  text-accent" : "bg-accent text-white/90"}`}>{ !liked ? "Додати до улюблених" : "Видалити з улюблених" }</button>
+          }
+          className={`flex items-center justify-center gap-2 px-5.5 py-2.5 w-full text-sm uppercase shadow-[0_4px_32px_rgba(0,0,0,0.4)] ${!liked ? "bg-white  text-accent" : "bg-accent text-white/90"}`}
+        >
+          {!liked ? <Heart /> : <HeartCrack />}
+          {!liked ? "Додати до улюблених" : "Видалити з улюблених"}
+        </button>
       </div>
-    </> 
+    </>
   );
 }
 

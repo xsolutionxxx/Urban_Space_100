@@ -6,8 +6,6 @@ import { useWishlist } from "@features/wishlist/useWishlist";
 import ProductSwiper from "./productSwiper/ProductSwiper";
 import ImageWithLoader from "@components/ui/ImageWithLoader";
 
-const API_URL = "http://localhost:5000";
-
 function ProductCard({
   id,
   images,

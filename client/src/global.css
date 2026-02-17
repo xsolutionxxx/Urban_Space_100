@@ -25,6 +25,7 @@
     --color-primary: #ffffff;
     --color-secondary: #EEEEEE;
     --color-accent: #e35858;
+    --color-cta: #5c9cdd;
     --color-text-main: #000000;
     --color-text-sub: #e5e7eb;
 
@@ -50,6 +51,7 @@ body {
     --color-primary: #3B3B3B;
     --color-secondary: #333333;
     --color-accent: #c04040;
+    --color-cta: #3e90e2;
     --color-text-main: #ffffff;
     --color-text-sub: #d1d5dc;
 }
